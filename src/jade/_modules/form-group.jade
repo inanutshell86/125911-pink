@@ -1,9 +1,35 @@
-mixin form-group(item)
-  +b.form-group
+mixin form-group(item,order)
+  - var className = order=="revers" ? "--reverse" : null
+  - var className2 = item.inputType=="tel" ? "--tel" : null
+  - var className3 = item.inputType=="email" ? "--email" : null
+
+  +b.form-group(class=className)
     +e.LABEL.label(for="form-" + item.name)= item.label
-    +e.INPUT.input(
-      type = item.inputType,
-      name = "form-" + item.name,
-      id = "form-" + item.name,
-      placeholder = item.placeholder
-    )
+
+    if item.inputType == "tel"
+      +e.DIV.wrap--phone
+        +e.INPUT.input(
+          type = item.inputType,
+          name = "form-" + item.name,
+          id = "form-" + item.name,
+          placeholder = item.placeholder
+        )
+
+
+    else if item.inputType == "email"
+      +e.DIV.wrap--email
+        +e.INPUT.input(
+          type = item.inputType,
+          name = "form-" + item.name,
+          id = "form-" + item.name,
+          placeholder = item.placeholder
+        )
+
+
+    else
+      +e.INPUT.input(
+          type = item.inputType,
+          name = "form-" + item.name,
+          id = "form-" + item.name,
+          placeholder = item.placeholder
+        )
